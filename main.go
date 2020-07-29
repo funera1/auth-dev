@@ -24,16 +24,17 @@ var db *sql.DB
 func main() {
 	db, err := sql.Open("mysql", authFunctions.DBLocation())
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
+		return
 	}
 
 	err = db.Ping()
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
+		return
 	}
 
 	db.Close()
-
 
 	// urls.py
 	router := mux.NewRouter()

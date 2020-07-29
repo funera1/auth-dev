@@ -13,7 +13,6 @@ import (
 func removeAccount(w http.ResponseWriter, r *http.Request) {
 	var user User
 	var error Error
-	var jwt JWT
 
 	json.NewDecoder(r.Body).Decode(&user)
 
@@ -44,7 +43,7 @@ func removeAccount(w http.ResponseWriter, r *http.Request) {
 
 	defer db.Close()
 
-	// 認証キー(Emal)のユーザー情報をDBから取得
+	// 認証キー(Email)のユーザー情報をDBから取得
 	row := db.QueryRow("SELECT * FROM users WHERE email = ?;", user.Email)
 
 	err = row.Scan(&user.ID, &user.Email, &user.Password)
